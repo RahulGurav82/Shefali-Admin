@@ -91,7 +91,7 @@ const ContactForm = ({ onClose }) => {
         <button onClick={onClose} className="absolute top-2 right-3 text-gray-600 hover:text-gray-800">&times;</button>
         <h2 className="text-xl font-semibold text-neutral-800 mb-4">Book a Service</h2>
         <form action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="e556e9fa-a4de-4f39-b6a8-276444fe3388" />
+          <input type="hidden" name="access_key" value="fb5c4463-6e7d-4475-b2aa-dbc0e95ec70a" />
           
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Your Name</label>
