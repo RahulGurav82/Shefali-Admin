@@ -1,14 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Scissors, RefreshCw, Shirt, Hammer, Recycle } from 'lucide-react';
 
 const ServicesPage = () => {
-  const phoneNumber = "+918657179075";
-  
-  const handleCallClick = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => setShowForm(!showForm);
 
   return (
     <div className="bg-neutral-50 min-h-screen">
@@ -25,75 +23,49 @@ const ServicesPage = () => {
           <ServiceCard 
             icon={<Scissors className="h-10 w-10 text-amber-600" />}
             title="Alterations"
-            description="Expert adjustment of your existing garments for the perfect fit. We specialize in hemming, taking in seams, shortening sleeves, and more."
-            onCallClick={handleCallClick}
+            description="Expert adjustment of your existing garments for the perfect fit."
+            onBookNowClick={toggleForm}
           />
           
           <ServiceCard 
             icon={<Hammer className="h-10 w-10 text-amber-600" />}
             title="Repairs"
-            description="Revitalize your favorite pieces with our meticulous repair services. From replacing zippers and buttons to mending tears and reinforcing seams."
-            onCallClick={handleCallClick}
+            description="Revitalize your favorite pieces with our meticulous repair services."
+            onBookNowClick={toggleForm}
           />
           
           <ServiceCard 
             icon={<Shirt className="h-10 w-10 text-amber-600" />}
             title="Custom Clothing"
-            description="Bring your vision to life with our bespoke garment creation. Tailored precisely to your measurements and designed to reflect your unique style."
-            onCallClick={handleCallClick}
+            description="Bring your vision to life with our bespoke garment creation."
+            onBookNowClick={toggleForm}
           />
           
           <ServiceCard 
             icon={<RefreshCw className="h-10 w-10 text-amber-600" />}
             title="Restyling"
-            description="Transform outdated pieces into contemporary fashion statements. We reimagine and recreate garments to give them renewed purpose and style."
-            onCallClick={handleCallClick}
+            description="Transform outdated pieces into contemporary fashion statements."
+            onBookNowClick={toggleForm}
           />
           
           <ServiceCard 
             icon={<Recycle className="h-10 w-10 text-amber-600" />}
             title="Recycling/Upcycling"
-            description="Embrace sustainable fashion with our creative repurposing services. Convert unused garments or fabrics into beautiful, functional new items."
-            onCallClick={handleCallClick}
+            description="Embrace sustainable fashion with our creative repurposing services."
+            onBookNowClick={toggleForm}
           />
-          
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
-            <div className="bg-amber-100 p-4 rounded-full mb-4">
-              <Scissors className="h-10 w-10 text-amber-600" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-xl font-semibold text-neutral-800 mb-2">Custom Consultation</h3>
-            <p className="text-neutral-600">
-              Schedule a personalized consultation to discuss your specific clothing needs and how our handmade expertise can serve you.
-            </p>
-            <button 
-              onClick={handleCallClick}
-              className="mt-6 bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-6 rounded-full transition-colors"
-            >
-              Book Now
-            </button>
-          </div>
         </div>
-        
-        <div className="mt-16 bg-amber-100 rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-neutral-800 mb-4">Our Craftsmanship Promise</h2>
-          <p className="text-neutral-700 max-w-3xl mx-auto mb-6">
-            Every stitch we make reflects our commitment to quality and sustainability. We use ethically sourced materials
-            and traditional techniques to create garments that last, reducing fashion waste and honoring the art of tailoring.
-          </p>
-          <p className="text-lg font-medium text-amber-800">
-            To book an appointment, call us at: {" "}
-            <a href={`tel:${phoneNumber}`} className="underline hover:text-amber-900">
-              +91 86571 79075
-            </a>
-          </p>
-        </div>
+
+        {/* Contact Form */}
+        {showForm && <ContactForm onClose={toggleForm} />}
+
       </div>
     </div>
   );
 };
 
-// Component for service cards to maintain consistent styling
-const ServiceCard = ({ icon, title, description, onCallClick }) => {
+// Service Card Component
+const ServiceCard = ({ icon, title, description, onBookNowClick }) => {
   return (
     <div className="bg-white border border-neutral-200 rounded-lg p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
       <div className="bg-amber-50 p-4 rounded-full mb-4">
@@ -102,11 +74,74 @@ const ServiceCard = ({ icon, title, description, onCallClick }) => {
       <h3 className="text-xl font-semibold text-neutral-800 mb-2">{title}</h3>
       <p className="text-neutral-600 mb-6">{description}</p>
       <button 
-        onClick={onCallClick}
+        onClick={onBookNowClick}
         className="mt-auto bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-6 rounded-full transition-colors"
       >
         Book Now
       </button>
+    </div>
+  );
+};
+
+// Contact Form Component
+const ContactForm = ({ onClose }) => {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded-lg w-96 shadow-lg relative">
+        <button onClick={onClose} className="absolute top-2 right-3 text-gray-600 hover:text-gray-800">&times;</button>
+        <h2 className="text-xl font-semibold text-neutral-800 mb-4">Book a Service</h2>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="e556e9fa-a4de-4f39-b6a8-276444fe3388" />
+          
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Your Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              required 
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <input 
+              type="email" 
+              name="email" 
+              required 
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Service Required</label>
+            <select name="service" required className="mt-1 p-2 w-full border border-gray-300 rounded">
+              <option value="Alterations">Alterations</option>
+              <option value="Repairs">Repairs</option>
+              <option value="Custom Clothing">Custom Clothing</option>
+              <option value="Restyling">Restyling</option>
+              <option value="Recycling/Upcycling">Recycling/Upcycling</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Message</label>
+            <textarea 
+              name="message" 
+              required 
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-6 rounded-full transition-colors w-full"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
