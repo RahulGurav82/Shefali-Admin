@@ -105,7 +105,6 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         Add To Cart
       </button>
 
-      <ReviewSection productId={productInfo._id} />
     </div>
   );
 };

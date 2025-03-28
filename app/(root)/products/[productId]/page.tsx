@@ -16,7 +16,6 @@ const ProductDetails = async ({ params }: { params: { productId: string }}) => {
       <ProductInfo productInfo={productDetails} />
     </div>
 
-    <ReviewSection productId={productDetails._id} />
 
     <div className="flex flex-col items-center px-10 py-5 max-md:px-3">
       <p className="text-heading3-bold">Related Products</p>
