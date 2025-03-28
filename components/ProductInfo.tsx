@@ -3,6 +3,8 @@
 import { useState } from "react";
 import HeartFavorite from "./HeartFavorite";
 import { MinusCircle, PlusCircle } from "lucide-react";
+// In your product detail page
+import ReviewSection from '@/components/ReviewSection';
 
 import useCart from "@/lib/hooks/useCart";
 
@@ -102,6 +104,8 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
       >
         Add To Cart
       </button>
+
+      <ReviewSection productId={productInfo._id} />
     </div>
   );
 };

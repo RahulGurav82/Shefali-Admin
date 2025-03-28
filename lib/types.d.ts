@@ -44,3 +44,14 @@ type OrderItemType = {
   quantity: number;
   _id: string;
 }
+
+type ReviewType = {
+  _id: string;
+  productId: string;
+  userId: string;
+  rating: number;
+  comment: string;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
+};
