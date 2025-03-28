@@ -1,6 +1,8 @@
 import Gallery from "@/components/Gallery"
 import ProductCard from "@/components/ProductCard"
 import ProductInfo from "@/components/ProductInfo"
+// In your product detail page
+import ReviewSection from '@/components/ReviewSection';
 import { getProductDetails, getRelatedProducts } from "@/lib/actions/actions"
 
 const ProductDetails = async ({ params }: { params: { productId: string }}) => {
@@ -13,6 +15,8 @@ const ProductDetails = async ({ params }: { params: { productId: string }}) => {
       <Gallery productMedia={productDetails.media} />
       <ProductInfo productInfo={productDetails} />
     </div>
+
+    <ReviewSection productId={productDetails._id} />
 
     <div className="flex flex-col items-center px-10 py-5 max-md:px-3">
       <p className="text-heading3-bold">Related Products</p>
